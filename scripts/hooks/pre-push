@@ -10,6 +10,9 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Add common paths where uv might be installed
+export PATH="$HOME/.local/bin:$PATH"
+
 # Track if any checks fail
 FAILED=0
 
