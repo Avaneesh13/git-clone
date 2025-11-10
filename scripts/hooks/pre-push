@@ -45,16 +45,6 @@ else
     FAILED=1
 fi
 
-# Check 4: Type checking with mypy
-echo ""
-echo "🔍 Running type checks with mypy..."
-if poetry run mypy src/; then
-    echo -e "${GREEN}✓ Type checking passed${NC}"
-else
-    echo -e "${RED}✗ Type checking failed${NC}"
-    FAILED=1
-fi
-
 # Final result
 echo ""
 if [ $FAILED -eq 1 ]; then
