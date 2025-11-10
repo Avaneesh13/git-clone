@@ -28,7 +28,7 @@ Understanding how Git works under the hood makes you a better developer. This im
 ## Prerequisites
 
 - Python 3.9 or higher
-- Poetry package manager
+- uv package manager ([installation guide](https://docs.astral.sh/uv/getting-started/installation/))
 
 ## Installation
 
@@ -39,11 +39,11 @@ Understanding how Git works under the hood makes you a better developer. This im
 git clone https://github.com/YOUR_USERNAME/gitclone.git
 cd gitclone
 
-# Install with Poetry
-poetry install
+# Install with uv
+uv sync
 
 # Run the CLI
-poetry run gitclone --help
+uv run gitclone --help
 ```
 
 ### For Development
@@ -52,7 +52,7 @@ poetry run gitclone --help
 # Clone and install with dev dependencies
 git clone https://github.com/YOUR_USERNAME/gitclone.git
 cd gitclone
-poetry install
+uv sync --extra dev
 
 # Configure git to use version-controlled hooks
 bash scripts/install-hooks.sh
@@ -91,7 +91,7 @@ gitclone reset <commit> --hard
 ### Git Hooks
 The project uses version-controlled git hooks in `scripts/hooks/` that automatically check code quality before pushing:
 - **Pyflakes**: Checks for code errors
-- **Poetry lock**: Validates poetry.lock is up to date
+- **uv lock**: Validates uv.lock is up to date
 - **Black**: Ensures code formatting
 - **Mypy**: Runs type checking
 
@@ -105,26 +105,26 @@ This sets `core.hooksPath` to `scripts/hooks/`, so hooks are version-controlled 
 ### Code Formatting
 ```bash
 # Format code with Black
-poetry run black src/ tests/
+uv run black src/ tests/
 
 # Check formatting without changes
-poetry run black --check src/ tests/
+uv run black --check src/ tests/
 ```
 
 ### Linting
 ```bash
 # Check for code errors
-poetry run pyflakes src/ tests/
+uv run pyflakes src/ tests/
 ```
 
 ### Testing
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
 ### Type Checking
 ```bash
-poetry run mypy src/
+uv run mypy src/
 ```
 
 ## Project Structure

@@ -16,32 +16,32 @@ FAILED=0
 # Check 1: Pyflakes for code errors
 echo ""
 echo "📝 Checking for code errors with pyflakes..."
-if poetry run pyflakes src/ tests/; then
+if uv run pyflakes src/ tests/; then
     echo -e "${GREEN}✓ Pyflakes check passed${NC}"
 else
     echo -e "${RED}✗ Pyflakes found errors${NC}"
     FAILED=1
 fi
 
-# Check 2: Poetry lock file is up to date
+# Check 2: uv lock file is up to date
 echo ""
-echo "🔒 Checking if poetry.lock is up to date..."
-if poetry check --lock; then
-    echo -e "${GREEN}✓ poetry.lock is up to date${NC}"
+echo "🔒 Checking if uv.lock is up to date..."
+if uv lock --check; then
+    echo -e "${GREEN}✓ uv.lock is up to date${NC}"
 else
-    echo -e "${RED}✗ poetry.lock is out of sync with pyproject.toml${NC}"
-    echo -e "${YELLOW}Run: poetry lock --no-update${NC}"
+    echo -e "${RED}✗ uv.lock is out of sync with pyproject.toml${NC}"
+    echo -e "${YELLOW}Run: uv lock${NC}"
     FAILED=1
 fi
 
 # Check 3: Black formatting
 echo ""
 echo "🎨 Checking code formatting with Black..."
-if poetry run black --check src/ tests/; then
+if uv run black --check src/ tests/; then
     echo -e "${GREEN}✓ Code formatting is correct${NC}"
 else
     echo -e "${RED}✗ Code needs formatting${NC}"
-    echo -e "${YELLOW}Run: poetry run black src/ tests/${NC}"
+    echo -e "${YELLOW}Run: uv run black src/ tests/${NC}"
     FAILED=1
 fi
 
