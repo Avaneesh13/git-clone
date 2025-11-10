@@ -103,7 +103,8 @@ def create_parser() -> argparse.ArgumentParser:
         "index", nargs="?", type=int, default=0, help="Stash index"
     )
 
-    stash_list = stash_subparsers.add_parser("list", help="List all stashes")
+    # TODO: Change var name to stash list once we start using it.
+    _ = stash_subparsers.add_parser("list", help="List all stashes")
 
     parser_stash.set_defaults(func=cmd_stash)
 
