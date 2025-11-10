@@ -53,6 +53,9 @@ poetry run gitclone --help
 git clone https://github.com/YOUR_USERNAME/gitclone.git
 cd gitclone
 poetry install
+
+# Install git hooks for pre-push checks
+bash scripts/install-hooks.sh
 ```
 
 ## Usage
@@ -85,6 +88,18 @@ gitclone reset <commit> --hard
 
 ## Development Tools
 
+### Git Hooks
+The project includes pre-push hooks that automatically check code quality before pushing:
+- **Pyflakes**: Checks for code errors
+- **Poetry lock**: Validates poetry.lock is up to date
+- **Black**: Ensures code formatting
+- **Mypy**: Runs type checking
+
+Install hooks with:
+```bash
+bash scripts/install-hooks.sh
+```
+
 ### Code Formatting
 ```bash
 # Format code with Black
@@ -92,6 +107,12 @@ poetry run black src/ tests/
 
 # Check formatting without changes
 poetry run black --check src/ tests/
+```
+
+### Linting
+```bash
+# Check for code errors
+poetry run pyflakes src/ tests/
 ```
 
 ### Testing
@@ -115,7 +136,6 @@ gitclone/
 │       ├── interfaces.py    # Abstract base classes
 │       └── errors.py        # Error handling
 ├── tests/                   # Test suite
-├── .kiro/specs/            # Design specifications
 ├── pyproject.toml          # Project configuration
 └── README.md
 ```

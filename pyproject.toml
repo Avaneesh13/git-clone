@@ -32,6 +32,7 @@ colorama = "^0.4.6"
 pytest = "^7.0.0"
 mypy = "^1.0.0"
 black = "^24.0.0"
+pyflakes = "^3.2.0"
 
 [tool.poetry.scripts]
 gitclone = "gitclone.cli:main"
