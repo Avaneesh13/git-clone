@@ -54,7 +54,7 @@ git clone https://github.com/YOUR_USERNAME/gitclone.git
 cd gitclone
 poetry install
 
-# Install git hooks for pre-push checks
+# Configure git to use version-controlled hooks
 bash scripts/install-hooks.sh
 ```
 
@@ -89,16 +89,18 @@ gitclone reset <commit> --hard
 ## Development Tools
 
 ### Git Hooks
-The project includes pre-push hooks that automatically check code quality before pushing:
+The project uses version-controlled git hooks in `scripts/hooks/` that automatically check code quality before pushing:
 - **Pyflakes**: Checks for code errors
 - **Poetry lock**: Validates poetry.lock is up to date
 - **Black**: Ensures code formatting
 - **Mypy**: Runs type checking
 
-Install hooks with:
+Configure git to use these hooks:
 ```bash
 bash scripts/install-hooks.sh
 ```
+
+This sets `core.hooksPath` to `scripts/hooks/`, so hooks are version-controlled and automatically updated.
 
 ### Code Formatting
 ```bash
@@ -136,6 +138,10 @@ gitclone/
 │       ├── interfaces.py    # Abstract base classes
 │       └── errors.py        # Error handling
 ├── tests/                   # Test suite
+├── scripts/
+│   ├── hooks/              # Version-controlled git hooks
+│   │   └── pre-push        # Pre-push quality checks
+│   └── install-hooks.sh    # Configure git hooks path
 ├── pyproject.toml          # Project configuration
 └── README.md
 ```
